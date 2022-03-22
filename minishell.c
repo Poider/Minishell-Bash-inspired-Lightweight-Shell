@@ -6,7 +6,7 @@
 /*   By: mel-amma <mel-amma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:39:10 by mel-amma          #+#    #+#             */
-/*   Updated: 2022/03/04 14:30:29 by mel-amma         ###   ########.fr       */
+/*   Updated: 2022/03/22 13:45:16 by mel-amma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1491,13 +1491,13 @@ void transfer_node_infos(t_commandtable *node_to_fill, t_commandtable *current_n
 int built_in_check(char *line)
 {
 
-	if (!ft_strncmp("cd", line, max(ft_strlen(line), ft_strlen(""))))
+	if (!ft_strncmp("cd", to_lower(line), max(ft_strlen(line), ft_strlen(""))))
 		return 11;
-	else if (!ft_strncmp("export", line, max(ft_strlen(line), ft_strlen(""))))
+	else if (!ft_strncmp("export", to_lower(line), max(ft_strlen(line), ft_strlen(""))))
 		return 13;
-	else if (!ft_strncmp("unset", line, max(ft_strlen(line), ft_strlen(""))))
+	else if (!ft_strncmp("unset", to_lower(line), max(ft_strlen(line), ft_strlen(""))))
 		return 14;
-	else if (!ft_strncmp("exit", line, max(ft_strlen(line), ft_strlen(""))))
+	else if (!ft_strncmp("exit", to_lower(line), max(ft_strlen(line), ft_strlen(""))))
 		return 15;
 	else
 		return 0;
@@ -1628,8 +1628,9 @@ int main(int argc, char **argv, char **env)
 
 		if (!is_full_of_whitespaces(v_lines->entered_line))
 		{
-			processline(v_lines);
 			add_history(v_lines->entered_line);
+			processline(v_lines);
+			
 		}
 		if (v_lines->parent_id != 0)
 		{

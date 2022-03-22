@@ -6,7 +6,7 @@
 /*   By: mel-amma <mel-amma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:39:21 by mel-amma          #+#    #+#             */
-/*   Updated: 2022/03/04 13:26:35 by mel-amma         ###   ########.fr       */
+/*   Updated: 2022/03/22 12:47:03 by mel-amma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_line_processing_history
 	struct termios	terminal_settings;
 }				t_line_processing_history;
 
+int	ft_tolower(int a);
 char			**ft_split_whitespaces(char *str);
 t_arguments *match_with_directory(char *pattern);
 void close_fds(t_commandtable *command_table);
