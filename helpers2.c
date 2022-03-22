@@ -6,7 +6,7 @@
 /*   By: mel-amma <mel-amma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:51:34 by mel-amma          #+#    #+#             */
-/*   Updated: 2022/02/18 17:48:09 by mel-amma         ###   ########.fr       */
+/*   Updated: 2022/03/22 12:46:54 by mel-amma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,11 @@ char	*ft_itoa(int n)
 		work = work / 10;
 	}
 	return (res);
+}
+
+int	ft_tolower(int a)
+{
+	if (a >= 65 && a <= 90)
+		a += 32;
+	return (a);
 }
