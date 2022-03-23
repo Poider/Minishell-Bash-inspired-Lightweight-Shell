@@ -6,7 +6,7 @@
 /*   By: mel-amma <mel-amma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:39:21 by mel-amma          #+#    #+#             */
-/*   Updated: 2022/03/22 12:47:03 by mel-amma         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:52:54 by mel-amma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_commandtable
 	int						is_a_fileA;
 	int						is_heredoc; 
 	char					*limiter;
-
+	
 	int						pipe;
 	int						redirections;
 	
@@ -73,7 +73,10 @@ typedef struct s_line_processing_history
 	int					got_command_yet;
 
 /*1*/
-	pid_t			process_id;
+
+	pid_t			*process_id;
+	int 			iterator;
+	int				commands_number;
 	char		**env_vars;
 	int			exit_status;//> this shall take 0 on success and number of error when its error
 	//put in waitpid 2nd arg(?)//

@@ -33,7 +33,7 @@ char **args_to_table(t_arguments *args)
 	}
 }
 
-int commands_number(t_commandtable *command_table)
+int number_of_commands(t_commandtable *command_table)
 {
 	int i;
 	
@@ -56,13 +56,14 @@ int execute(t_line_processing_history *v_lines)
 
 	pipe_save = 0;
 	command_table = v_lines->command_table;
-	
+	v_lines->commands_number =number_of_commands(command_table);
+	v_lines->process_id = malloc(sizeof(int) * v_lines->commands_number);
 	while (command_table != 0)
 	{
 		pipe(fd);
 		out = fd[1];
-		v_lines->process_id = fork();
-		if (v_lines->process_id == 0)
+		v_lines->process_id[v_lines->iterator++] = fork();
+		if (v_lines->process_id[v_lines->iterator - 1] == 0)
 		{
 			close(fd[0]);
 			if (pipe_save != 0)
@@ -92,6 +93,7 @@ int execute(t_line_processing_history *v_lines)
 		command_table = command_table->next;
 	}
 	
-	//wait all chilldreen 
+	//wait all childreen while none fails
+	//children ids are saved in command table process id and number of commands(children) are stored in command_table->commands_number
 	return 1;
 }

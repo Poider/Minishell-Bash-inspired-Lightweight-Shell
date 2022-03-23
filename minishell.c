@@ -6,7 +6,7 @@
 /*   By: mel-amma <mel-amma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:39:10 by mel-amma          #+#    #+#             */
-/*   Updated: 2022/03/22 13:45:16 by mel-amma         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:53:42 by mel-amma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ t_line_processing_history *v_lines;
 
 int free_lines(t_line_processing_history *v_lines)
 {
+	if(v_lines->process_id)
+	free(v_lines->process_id);
 	free(v_lines->entered_line);
 	free(v_lines->expanded_line);
 	free(v_lines->trimmed_line);
@@ -32,7 +34,9 @@ int null_lines(t_line_processing_history *v_lines)
 	v_lines->dollar_processed = 0;
 	v_lines->is_next_a_command = 0;
 	v_lines->command_table = 0;
-
+	v_lines->iterator = 0;
+	v_lines->process_id = 0;
+	v_lines->commands_number = 0;
 	return (1);
 }
 
@@ -63,7 +67,8 @@ int initialize_v_lines(t_line_processing_history *v_lines, char **env)
 	v_lines->exit_status = 0;
 	v_lines->command_table = 0;
 	v_lines->is_next_a_command = 0;
-	v_lines->process_id = 11112;
+	v_lines->iterator = 0;
+	v_lines->process_id = 0;
 	v_lines->parent_id = 11;
 	v_lines->got_command_yet = 0;
 	v_lines->entered_line = 0;
@@ -169,19 +174,9 @@ void ctrl_backslash_handler(int signum)
 
 void get_parent_id(int signum, siginfo_t *siginfo, void *noUse)
 {
-	if (v_lines->process_id == 0)
-	{
-		v_lines->parent_id = siginfo->si_pid;
-	}
+	v_lines->parent_id = siginfo->si_pid;
 }
 
-void exiting(int signum)
-{
-	if (v_lines->process_id != 0)
-	{
-		exit(0);
-	}
-}
 
 int handle_signals()
 {
