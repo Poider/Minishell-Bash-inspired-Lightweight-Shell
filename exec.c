@@ -33,6 +33,19 @@ char **args_to_table(t_arguments *args)
 	}
 }
 
+int commands_number(t_commandtable *command_table)
+{
+	int i;
+	
+	i = 0;
+	while(command_table)
+	{
+		i++;
+		command_table = command_table->next;
+	}
+	return i;
+}
+
 int execute(t_line_processing_history *v_lines)
 {
 	t_commandtable *command_table;
@@ -43,6 +56,7 @@ int execute(t_line_processing_history *v_lines)
 
 	pipe_save = 0;
 	command_table = v_lines->command_table;
+	
 	while (command_table != 0)
 	{
 		pipe(fd);
