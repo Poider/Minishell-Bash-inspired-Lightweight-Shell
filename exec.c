@@ -77,6 +77,7 @@ int execute(t_line_processing_history *v_lines)
 			else if (command_table ->next == 0)
 				out = 1;
 			dup2(out, 1);
+			//command//command_table->command;
 			args = args_to_table(command_table->argument);
 			// complete
 			// check access and execute built in or excve if its not in them

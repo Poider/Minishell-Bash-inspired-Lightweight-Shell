@@ -114,3 +114,15 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i] = '\0';
 	return (str);
 }
+
+char *to_lower(char *str)
+{
+	int i;
+	int len;
+
+	i = -1;
+	len = ft_strlen(str);
+	while(++i < len)
+		str[i] = ft_tolower(str[i]);
+	return str;
+}

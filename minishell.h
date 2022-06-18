@@ -153,7 +153,8 @@ int handle_exit();
 int initialize_v_lines(t_line_processing_history *v_lines, char **env);
 int null_lines(t_line_processing_history *v_lines);
 int free_lines(t_line_processing_history *v_lines);
-
+char *to_lower(char *str);
+int	ft_tolower(int a);
 
 
 

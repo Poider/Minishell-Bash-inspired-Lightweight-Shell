@@ -61,7 +61,7 @@ void duplicate_envirement_vars(t_line_processing_history *v_lines, char **env)
 	array[i] = 0;
 }
 
-int initialize_v_lines(t_line_processing_history *v_lines, char **env)
+intinitialize_v_lines(t_line_processing_history *v_lines, char **env)
 {
 
 	v_lines->exit_status = 0;
@@ -1524,7 +1524,7 @@ int is_built_in(t_line_processing_history *v_lines)
 	return (is_built_in);
 }
 
-void execute_built_in()
+void execute_built_in(int built_in_number)
 {
 	printf("execute built_in\n");
 }
@@ -1555,7 +1555,7 @@ int process_command_table(t_line_processing_history *v_lines)
 			current_node = current_node->next;
 		}
 		if (built_in_number)
-		execute_built_in();
+		execute_built_in(built_in_number);
 		return 0;
 	}
 	signal(SIGINT, SIG_DFL);
@@ -1592,7 +1592,7 @@ int processline(t_line_processing_history *v_lines)
 	{
 		print_ct(v_lines);
 		// syntax_check();
-		// execute();//talk bout if theres smth that needs to go back here in the parsin
+		execute(v_lines);//talk bout if theres smth that needs to go back here in the parsin
 	}
 	return (1);
 }
@@ -1643,3 +1643,4 @@ int main(int argc, char **argv, char **env)
 	}
 	return 1;
 }
+
