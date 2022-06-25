@@ -1,0 +1,8 @@
+test process dollar
+
+ls >a <<h -la | >>a wc <a -l
+ls -la <a | >>a wc <<a -l
+
+echo $TERM *mini* -la | <a wc -l << a >>a
+
+why is_a_command = 2;?

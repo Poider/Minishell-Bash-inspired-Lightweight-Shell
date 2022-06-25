@@ -6,7 +6,7 @@
 /*   By: mel-amma <mel-amma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:43:07 by mel-amma          #+#    #+#             */
-/*   Updated: 2022/02/22 14:45:05 by mel-amma         ###   ########.fr       */
+/*   Updated: 2022/06/25 17:24:17 by mel-amma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	if(!str)
-	return 0;
+	if (!str)
+		return (0);
 	while (*str)
 	{
 		str++;
@@ -97,7 +97,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	if (!s1)
 		s1 = "";
-	if(!s2)
+	if (!s2)
 		s2 = "";
 	lentotal = ft_strlen((char *)s1) + ft_strlen((char *)s2);
 	str = (char *)malloc(sizeof(char) * (lentotal + 1));
@@ -113,16 +113,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	str[i] = '\0';
 	return (str);
-}
-
-char *to_lower(char *str)
-{
-	int i;
-	int len;
-
-	i = -1;
-	len = ft_strlen(str);
-	while(++i < len)
-		str[i] = ft_tolower(str[i]);
-	return str;
 }

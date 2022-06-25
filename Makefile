@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = minishell.c helpers.c helpers2.c  wildcard.c
+SRC = minishell.c helpers.c helpers2.c helpers3.c  wildcard.c
 NAME = minishell
-FLAG = -lreadline -L /Users/mel-amma/Desktop/homebrew/opt/readline/lib -I /Users/mel-amma/Desktop/homebrew/opt/readline/include  -lncurses -g 
+FLAG = -lreadline -L /Users/mel-amma/Desktop/homebrew/opt/readline/lib -I /Users/mel-amma/Desktop/homebrew/opt/readline/include  -lncurses -g -fsanitize=address
 #!-Wall -Wextra -Werror!#
 all : $(NAME)
 
