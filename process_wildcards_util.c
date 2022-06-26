@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers3.c                                         :+:      :+:    :+:   */
+/*   process_wildcards_util.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-amma <mel-amma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/08 15:51:34 by mel-amma          #+#    #+#             */
-/*   Updated: 2022/06/26 11:48:55 by mel-amma         ###   ########.fr       */
+/*   Created: 2022/06/26 12:43:26 by mel-amma          #+#    #+#             */
+/*   Updated: 2022/06/26 12:43:27 by mel-amma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_tolower(int a)
+void	delete_arg_node(t_commandtable *command_table,
+			t_arguments *arg_to_delete)
 {
-	if (a >= 65 && a <= 90)
-		a += 32;
-	return (a);
+	t_arguments	*previous;
+	t_arguments	*next;
+
+	next = arg_to_delete->next;
+	previous = arg_to_delete->previous;
+	if (arg_to_delete->arg)
+		free(arg_to_delete->arg);
+	free(arg_to_delete);
+	if (previous)
+		previous->next = next;
+	else
+		command_table->argument = next;
+	if (next)
+		next->previous = previous;
 }
 
-char	*to_lower(char *str)
-{
-	int	i;
-	int	len;
-
-	i = -1;
-	len = ft_strlen(str);
-	while (++i < len)
-		str[i] = ft_tolower(str[i]);
-	return (str);
-}
-
-int	max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}

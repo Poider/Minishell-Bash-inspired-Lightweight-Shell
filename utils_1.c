@@ -1,39 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers3.c                                         :+:      :+:    :+:   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-amma <mel-amma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/08 15:51:34 by mel-amma          #+#    #+#             */
-/*   Updated: 2022/06/26 11:48:55 by mel-amma         ###   ########.fr       */
+/*   Created: 2022/06/26 12:26:24 by mel-amma          #+#    #+#             */
+/*   Updated: 2022/06/26 12:28:09 by mel-amma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_tolower(int a)
+char	*get_var(char *var)
 {
-	if (a >= 65 && a <= 90)
-		a += 32;
-	return (a);
+	char	*var_value;
+
+	var_value = getenv(var);
+	free(var);
+	return (var_value);
 }
 
-char	*to_lower(char *str)
+int	whitespaces(char c)
+{
+	return (c == '\n' || c == '\t' || c == ' '
+		|| c == '\r' || c == '\v' || c == '\f');
+}
+
+int	is_full_of_whitespaces(char *line)
 {
 	int	i;
-	int	len;
 
-	i = -1;
-	len = ft_strlen(str);
-	while (++i < len)
-		str[i] = ft_tolower(str[i]);
-	return (str);
+	i = 0;
+	if (!line)
+		return (1);
+	while (line[i])
+	{
+		if (!whitespaces(line[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-int	max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}

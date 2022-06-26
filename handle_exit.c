@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers3.c                                         :+:      :+:    :+:   */
+/*   handle_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-amma <mel-amma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/08 15:51:34 by mel-amma          #+#    #+#             */
-/*   Updated: 2022/06/26 11:48:55 by mel-amma         ###   ########.fr       */
+/*   Created: 2022/06/26 12:52:11 by mel-amma          #+#    #+#             */
+/*   Updated: 2022/06/26 12:52:12 by mel-amma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_tolower(int a)
+int	handle_exit(void)
 {
-	if (a >= 65 && a <= 90)
-		a += 32;
-	return (a);
-}
-
-char	*to_lower(char *str)
-{
-	int	i;
-	int	len;
-
-	i = -1;
-	len = ft_strlen(str);
-	while (++i < len)
-		str[i] = ft_tolower(str[i]);
-	return (str);
-}
-
-int	max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
+	printf("exit\n");
+	free_env(g_v_lines->env_vars);
+	free_all(g_v_lines);
+	tcsetattr(0, TCSANOW, &g_v_lines->terminal_settings);
+	system("leaks minishell");
+	exit(g_v_lines->exit_status);
 }

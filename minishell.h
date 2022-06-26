@@ -6,7 +6,7 @@
 /*   By: mel-amma <mel-amma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:39:21 by mel-amma          #+#    #+#             */
-/*   Updated: 2022/06/25 17:21:59 by mel-amma         ###   ########.fr       */
+/*   Updated: 2022/06/26 13:09:49 by mel-amma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@
 # include <readline/history.h>
 # include <dirent.h>
 
-typedef struct s_commandtable	t_commandtable;
-typedef struct s_arguments		t_arguments;
+typedef struct s_commandtable				t_commandtable;
+typedef struct s_arguments					t_arguments;
+typedef struct s_line_processing_history	t_line_processing_history;
+t_line_processing_history					*g_v_lines;
 
 typedef struct s_iters1
 {
@@ -221,6 +223,28 @@ int				null_lines(t_line_processing_history *g_v_lines);
 int				free_lines(t_line_processing_history *g_v_lines);
 char			*to_lower(char *str);
 int				ft_tolower(int a);
+int				process_command_table(t_line_processing_history *g_v_lines);
+void			free_env(char **arr);
+int				herdoc_error(char *line, int i);
+int				find_duplicate_redirections(char *line, int i);
+int				start_error(char *line);
+int				check_previous_redirection(char *line, int start);
+t_commandtable	*get_node_to_fill(t_commandtable *current_node);
+void			duplicate_files(t_commandtable *command_table);
+int				is_built_in(t_line_processing_history *g_v_lines);
+int				open_all(t_commandtable *command_table);
+int				process_wildcards(t_commandtable *command_table);
+void			delete_arg_node(t_commandtable *command_table,
+					t_arguments *arg_to_delete);
+//signals
+void			ctrl_c_handler(int signum, siginfo_t *siginfo, void *noUse);
+void			in_herdoc(int signum);
+void			ctrl_backslash_handler(int signum);
+void			get_parent_id(int signum, siginfo_t *siginfo, void *noUse);
+int				handle_signals(void);
+void			link_argument_nodes(t_commandtable *node_to_fill,
+					t_commandtable *current_node);
+void			execute_built_in(int built_in_number);
 
 //helpers
 int				numbcount(int n);

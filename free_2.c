@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers3.c                                         :+:      :+:    :+:   */
+/*   free_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-amma <mel-amma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/08 15:51:34 by mel-amma          #+#    #+#             */
-/*   Updated: 2022/06/26 11:48:55 by mel-amma         ###   ########.fr       */
+/*   Created: 2022/06/26 11:50:13 by mel-amma          #+#    #+#             */
+/*   Updated: 2022/06/26 11:54:05 by mel-amma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_tolower(int a)
+void	free_command_table(t_commandtable *command_table)
 {
-	if (a >= 65 && a <= 90)
-		a += 32;
-	return (a);
+	t_commandtable	*table;
+
+	while (command_table)
+	{
+		table = command_table->next;
+		free_command_table_content(command_table);
+		free(command_table);
+		command_table = table;
+	}
 }
 
-char	*to_lower(char *str)
+void	free_all(t_line_processing_history *g_v_lines)
 {
-	int	i;
-	int	len;
-
-	i = -1;
-	len = ft_strlen(str);
-	while (++i < len)
-		str[i] = ft_tolower(str[i]);
-	return (str);
-}
-
-int	max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
+	free_command_table(g_v_lines->command_table);
+	free_lines(g_v_lines);
+	null_lines(g_v_lines);
 }
