@@ -68,6 +68,11 @@ From here, you can:
 
 A typical session looks like this:
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/eff1be0a-7615-402b-accb-1f11720c901d" alt="minishell">
+</p>
+
+
 ```bash
 minishell> echo "Welcome to Minishell!"
 Welcome to Minishell!
